@@ -1,8 +1,8 @@
 # Tarea1_PrincipiosOS
-# [NOMBRE DEL PROYECTO]
+# TAREA #1 - MiniPc
 ## Integrantes:
-### [Carné] [Nombre]
+### 2023379891 - Quiriat Mata Araya
 
-### Estado del proyecto: Escala de 1 a 5, 1 siendo completo y 5 muy malo
+### Estado del proyecto: 4
 ### Enlace del video: (Si esto fue solicitado)
 Recordar que el video debe ser público y con sonido para ser visto por el profesor
