@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.tec.minipc.core;
 
 import com.tec.minipc.model.Instruction;
@@ -62,7 +58,7 @@ public class Cpu {
         pcb.setEstado(PCB.Estado.EJECUTANDO);
 
         int direccionActual = registros.getPc();
-        int limite = pcb.getDireccionBase() + (pcb.getTamanoInstrucciones() * 2);
+        int limite = pcb.getDireccionBase() + pcb.getTamanoInstrucciones();
 
         boolean sinMasInstrucciones = direccionActual >= limite
                 || !memoria.isValidAddress(direccionActual)
@@ -74,14 +70,13 @@ public class Cpu {
             return null;
         }
 
-        // FETCH: se buscan los 2 bytes de la instrucción en la dirección actual del PC
-        int byte0 = memoria.read(direccionActual);
-        int byte1 = memoria.read(direccionActual + 1);
+        // FETCH: cada posición de memoria guarda una instrucción completa
+        Instruction instruccion = memoria.read(direccionActual);
 
-        // DECODE: se arma el objeto Instruction y se guarda en el registro IR
-        Instruction instruccion = Instruction.decode(byte0, byte1);
+        // DECODE: en este diseño la "decodificación" ya está hecha al guardar en memoria;
+        // solo se refleja en el registro IR (su binario se calcula bajo demanda para la UI)
         registros.setIr(instruccion);
-        registros.advancePc(2);
+        registros.advancePc(1);
 
         // EXECUTE: se aplica el efecto de la instrucción sobre AC / el registro correspondiente
         ejecutar(instruccion);
